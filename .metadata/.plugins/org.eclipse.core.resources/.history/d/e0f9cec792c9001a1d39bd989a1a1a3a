@@ -1,0 +1,146 @@
+package com.apollo.gis.authserver.config;
+
+import static org.junit.Assert.assertNotNull;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
+
+import org.apache.commons.codec.binary.Base64;
+import org.junit.Before;
+import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.json.JacksonJsonParser;
+import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.security.web.FilterChainProxy;
+import org.springframework.test.context.junit4.SpringRunner;
+import org.springframework.test.context.web.WebAppConfiguration;
+import org.springframework.test.web.servlet.MockMvc;
+import org.springframework.test.web.servlet.ResultActions;
+import org.springframework.test.web.servlet.setup.MockMvcBuilders;
+import org.springframework.util.LinkedMultiValueMap;
+import org.springframework.util.MultiValueMap;
+import org.springframework.web.context.WebApplicationContext;
+
+import com.apollo.gis.authserver.AuthserverApplication;
+
+@RunWith(SpringRunner.class)
+@WebAppConfiguration
+@SpringBootTest(classes = AuthserverApplication.class)
+public class OAuthMvcTest {
+
+	@Autowired
+	private WebApplicationContext wac;
+
+	private MockMvc mockMvc;
+
+	@Autowired
+	private FilterChainProxy springSecurityFilterChain;
+
+	private static final String CLIENT_ID = "USER_CLIENT_APP";
+	private static final String CLIENT_SECRET = "password";
+	private static final String CONTENT_TYPE = "application/json;charset=UTF-8";
+
+	@Before
+	public void init() throws Exception {
+
+		this.mockMvc = MockMvcBuilders.webAppContextSetup(this.wac).addFilter(springSecurityFilterChain).build();
+
+	}
+
+	private String obtainAccessToken(String username, String password) throws Exception {
+
+		MultiValueMap<String, String> params = new LinkedMultiValueMap<>();
+		params.add("grant_type", "password");
+		params.add("username", username);
+		params.add("password", password);
+
+		ResultActions result = mockMvc.perform(
+				post("/oauth/token").params(params).header("Authorization", getBasicAuthHeader()).accept(CONTENT_TYPE))
+				.andExpect(status().isOk());
+
+		String resultString = result.andReturn().getResponse().getContentAsString();
+
+		JacksonJsonParser jsonParser = new JacksonJsonParser();
+		return jsonParser.parseMap(resultString).get("access_token").toString();
+	}
+
+	private String obtainRefreshToken(String username, String password) throws Exception {
+
+		MultiValueMap<String, String> params = new LinkedMultiValueMap<>();
+		params.add("grant_type", "password");
+		params.add("username", username);
+		params.add("password", password);
+
+		ResultActions result = mockMvc.perform(
+				post("/oauth/token").params(params).header("Authorization", getBasicAuthHeader()).accept(CONTENT_TYPE))
+				.andExpect(status().isOk());
+
+		String resultString = result.andReturn().getResponse().getContentAsString();
+
+		JacksonJsonParser jsonParser = new JacksonJsonParser();
+
+		return jsonParser.parseMap(resultString).get("refresh_token").toString();
+
+	}
+
+	@Test
+	public void getAccessToken() throws Exception {
+
+		String userName = "admin";
+		String password = "password";
+
+		final String refreshToken = obtainAccessToken(userName, password);
+		assertNotNull(refreshToken);
+
+	}
+
+	@Test
+	public void getRefreshToken() throws Exception {
+
+		String userName = "admin";
+		String password = "password";
+
+		final String refreshToken = obtainRefreshToken(userName, password);
+		assertNotNull(refreshToken);
+
+	}
+
+	@Test
+	public void getAccessTokenUseRefreshToken() throws Exception {
+
+		String userName = "admin";
+		String password = "password";
+
+		final String refreshToken = obtainRefreshToken(userName, password);
+		assertNotNull(refreshToken);
+
+		final String accessToken = obtainAccessTokenUsing_RefreshToken(refreshToken);
+		assertNotNull(accessToken);
+
+	}
+
+	private String obtainAccessTokenUsing_RefreshToken(final String refreshToken) throws Exception {
+
+		MultiValueMap<String, String> params = new LinkedMultiValueMap<>();
+		params.add("grant_type", "refresh_token");
+		params.add("refresh_token", refreshToken);
+
+		ResultActions result = mockMvc.perform(
+				post("/oauth/token").params(params).header("Authorization", getBasicAuthHeader()).accept(CONTENT_TYPE))
+				.andExpect(status().isOk());
+
+		String resultString = result.andReturn().getResponse().getContentAsString();
+
+		JacksonJsonParser jsonParser = new JacksonJsonParser();
+		return jsonParser.parseMap(resultString).get("access_token").toString();
+
+	}
+
+	private String getBasicAuthHeader() {
+		String auth = CLIENT_ID + ":" + CLIENT_SECRET;
+		byte[] encodedAuth = Base64.encodeBase64(auth.getBytes());
+		String authHeader = "Basic " + new String(encodedAuth);
+		return authHeader;
+	}
+
+}

@@ -1,0 +1,20 @@
+package com.apollo.gis.authserver.entity;
+
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
+
+import org.junit.jupiter.api.Test;
+
+class PermissionTest {
+
+	@Test
+	void permissionTest() {
+
+		Permission permission = new Permission();
+		permission.setName("can_create_user");
+
+		assertEquals("can_create_user", permission.getName());
+		assertNotNull(permission.getName());
+	}
+
+}

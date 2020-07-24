@@ -1,0 +1,5 @@
+package com.gobeyond.java8;
+
+public class MethodReferenceToConstructor {
+
+}

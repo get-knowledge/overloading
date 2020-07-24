@@ -1,0 +1,18 @@
+package com.gobeyond.java8;
+
+
+ interface Printable{
+	
+	void print();
+	default void printColor() {
+		System.out.println("Printing Color copy");
+	}
+	 
+}
+
+
+public class FunctionalInterface {
+
+	
+	
+}

@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<qualifiedTypeNameHistroy>
+<fullyQualifiedTypeName name="com.gobeyond.ecommerce.auth.server.model.User"/>
+<fullyQualifiedTypeName name="com.apollo.gis.authserver.entity.User"/>
+<fullyQualifiedTypeName name="com.gobeyond.ecommerce.auth.server.AuthserverApplication"/>
+<fullyQualifiedTypeName name="com.gobeyond.ecommerce.auth.server.entity.BaseIdEntity"/>
+<fullyQualifiedTypeName name="com.gobeyond.ecommerce.auth.server.entity.Permission"/>
+<fullyQualifiedTypeName name="com.gobeyond.ecommerce.auth.server.entity.Role"/>
+<fullyQualifiedTypeName name="com.gobeyond.ecommerce.auth.server.repository.UserRepository"/>
+<fullyQualifiedTypeName name="com.gobeyond.ecommerce.auth.server.entity.User"/>
+</qualifiedTypeNameHistroy>

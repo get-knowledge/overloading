@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<session version="1.0">
+<refactoring accessors="true" comment="Delete element from project &apos;e-commerce-auth-server&apos;&#x0A;- Original project: &apos;e-commerce-auth-server&apos;&#x0A;- Original element: &apos;e-commerce-auth-server/src/main/java/com.gobeyond.ecommerce.auth.server.controller&apos;" description="Delete element" element1="/src\/main\/java=/optional=/true=/=/maven.pomderived=/true=/&lt;com.gobeyond.ecommerce.auth.server.controller" elements="1" flags="589830" id="org.eclipse.jdt.ui.delete" resources="0" stamp="1593877939805" subPackages="false" version="1.0"/>
+</session>

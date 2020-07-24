@@ -1,0 +1,20 @@
+package com.gobeyond.java8;
+
+
+@FunctionalInterface
+interface MyInterfaceTwo{
+	Hello display(String say);
+	
+}
+
+class Hello{
+	
+	public Hello(String say) {
+		System.out.println(say);
+	}
+	
+}
+
+public class MethodReferenceToConstructor {
+
+}

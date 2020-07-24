@@ -1,0 +1,17 @@
+package com.apollo.gis.authserver.entity;
+
+import javax.persistence.Entity;
+
+@Entity
+public class Permission extends BaseIdEntity<Long> {
+
+	private String name;
+
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
+	}
+}

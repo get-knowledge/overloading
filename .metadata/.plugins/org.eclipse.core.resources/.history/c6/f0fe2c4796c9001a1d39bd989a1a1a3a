@@ -1,0 +1,21 @@
+package com.gobeyond.ecommerce.auth.server.entity;
+
+import static org.junit.Assert.assertNotNull;
+import com.gobeyond.ecommerce.auth.server.entity.BaseIdEntity
+import org.junit.jupiter.api.Test;
+
+class BaseIdEntityTest {
+
+	@Test
+	void baseIdEntityTest() {
+		BaseIdEntity<Long> baseIdEntity = new BaseIdEntity<Long>();
+
+		assertNotNull(baseIdEntity);
+
+		BaseIdEntity<Integer> IntEntity = new BaseIdEntity<Integer>();
+
+		assertNotNull(IntEntity);
+
+	}
+
+}

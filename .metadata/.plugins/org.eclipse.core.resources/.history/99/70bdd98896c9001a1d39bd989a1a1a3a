@@ -1,0 +1,47 @@
+package com.gobeyond.ecommerce.auth.server.repository;
+
+import static org.junit.Assert.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+
+import org.junit.jupiter.api.Test;
+import org.junit.runner.RunWith;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
+
+import com.apollo.gis.authserver.entity.User;
+
+@RunWith(SpringJUnit4ClassRunner.class)
+@SpringBootTest
+class UserRepositoryTest {
+
+	@Autowired
+	private UserRepository userRepository;
+
+
+	@Test
+	void testFindByUsername() {
+
+		User usrR = userRepository.findByUsername("admin");
+
+		assertNotNull(usrR);
+
+		User usrI = userRepository.findById((Long) 1L).orElse(null);
+
+		assertNotNull(usrI);
+
+	}
+
+	@Test
+	void testFindByEmail() {
+
+		User usrR = userRepository.findByEmail("admin@yopmail.com");
+
+		assertNotNull(usrR);
+
+		assertEquals("admin@yopmail.com", usrR.getEmail());
+
+	}
+
+	
+}

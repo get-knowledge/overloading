@@ -1,0 +1,30 @@
+package com.gobeyond.java8;
+
+import java.util.ArrayList;
+import java.util.List;
+
+public class UseOfMap {
+
+	
+	public static void main(String a[]) {
+		
+		
+		List<String> lstStr = new ArrayList<String>();
+		
+		lstStr.add("a");
+		lstStr.add("b");
+		lstStr.add("c");
+		lstStr.add("d");
+		lstStr.add("e");
+		
+		
+		
+	}
+	
+	
+			
+	
+	
+			
+	
+}

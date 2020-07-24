@@ -1,0 +1,5 @@
+package com.gobeyond.employee.crud.entity;
+
+public class Student {
+
+}

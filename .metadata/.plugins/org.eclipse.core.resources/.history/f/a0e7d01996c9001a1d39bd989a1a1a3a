@@ -1,0 +1,72 @@
+package com.apollo.gis.authserver.service;
+
+import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertTrue;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+
+import org.junit.jupiter.api.Test;
+import org.junit.runner.RunWith;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.security.authentication.AccountStatusUserDetailsChecker;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
+
+import com.apollo.gis.authserver.entity.User;
+import com.apollo.gis.authserver.repository.UserRepository;
+
+@RunWith(SpringJUnit4ClassRunner.class)
+@SpringBootTest
+class CustomUserDetailsServiceTest {
+
+	@Autowired
+	private UserRepository userRepository;
+
+	@Test
+	void testLoadUserByEmail() {
+
+		String input = "admin@yopmail.com";
+
+		User user = null;
+
+		if (input.contains("@"))
+			user = userRepository.findByEmail(input);
+
+		assertNotNull(user);
+
+		new AccountStatusUserDetailsChecker().check(user);
+
+		assertNotNull(user);
+
+		assertEquals("admin@yopmail.com", user.getEmail());
+
+		assertTrue(user.isAccountNonExpired());
+		assertTrue(user.isAccountNonLocked());
+		assertTrue(user.isCredentialsNonExpired());
+		assertTrue(user.isEnabled());
+
+	}
+
+	private UserDetails loadUserByUsername(String input) {
+		User user = userRepository.findByUsername(input);
+
+		assertNotNull(user);
+		new AccountStatusUserDetailsChecker().check(user);
+
+		return user;
+	}
+
+	@Test
+	void testLoadUserByUsername() {
+
+		String username = "admin";
+
+		UserDetails userDetails = loadUserByUsername(username);
+
+		assertNotNull(userDetails);
+
+		assertEquals("admin", userDetails.getUsername());
+
+	}
+
+}

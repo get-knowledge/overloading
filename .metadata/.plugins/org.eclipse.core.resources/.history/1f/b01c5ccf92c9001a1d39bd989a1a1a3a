@@ -1,0 +1,21 @@
+package com.apollo.gis.authserver;
+
+import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.springframework.test.util.AssertionErrors.assertTrue;
+
+import org.junit.jupiter.api.Test;
+import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.boot.test.context.SpringBootTest.WebEnvironment;
+
+@SpringBootTest(classes = AuthserverApplication.class, webEnvironment = WebEnvironment.RANDOM_PORT)
+class AuthserverApplicationTests {
+
+	@Test
+	void contextLoads() {
+		AuthserverApplication authserverApplication = new AuthserverApplication();
+		assertTrue("If I run, Means I'm Okay!", true);
+		assertNotNull(authserverApplication);
+
+	}
+
+}

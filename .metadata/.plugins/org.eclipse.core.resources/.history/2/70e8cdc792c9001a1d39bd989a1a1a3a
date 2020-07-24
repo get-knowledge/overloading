@@ -1,0 +1,21 @@
+package com.apollo.gis.authserver.entity;
+
+import static org.junit.Assert.assertNotNull;
+
+import org.junit.jupiter.api.Test;
+
+class BaseIdEntityTest {
+
+	@Test
+	void baseIdEntityTest() {
+		BaseIdEntity<Long> baseIdEntity = new BaseIdEntity<Long>();
+
+		assertNotNull(baseIdEntity);
+
+		BaseIdEntity<Integer> IntEntity = new BaseIdEntity<Integer>();
+
+		assertNotNull(IntEntity);
+
+	}
+
+}

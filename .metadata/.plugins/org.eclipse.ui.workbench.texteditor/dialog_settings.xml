@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<section name="Workbench">
+	<section name="org.eclipse.ui.texteditor.FindReplaceDialog">
+		<item key="selection" value="spring-security-oauth2"/>
+		<list key="findhistory">
+			<item value="spring-security-oauth2"/>
+			<item value="EXPIRATION"/>
+			<item value="RESOURCE_ID"/>
+			<item value="keystorePass"/>
+		</list>
+	</section>
+</section>
